@@ -9,12 +9,14 @@ ENV AOZORAEPUB3_FILE AozoraEpub3-${AOZORAEPUB3_VERSION}
 WORKDIR /temp
 
 RUN set -x \
+ # install tzdata
+ && apt update \
+ && apt install -y tzdata \
  # install AozoraEpub3
  && wget https://github.com/kyukyunyorituryo/AozoraEpub3/releases/download/${AOZORAEPUB3_VERSION}/${AOZORAEPUB3_FILE}.zip \
  && unzip -q ${AOZORAEPUB3_FILE} \
  && mv ${AOZORAEPUB3_FILE} /aozoraepub3 \
   # install openjdk11
- && apt update \
  && apt install -y openjdk-11-jdk \
  # install mobi generateor tools instad of kindlegen binary
  && apt install -y epub-utils libebook-tools-perl libepub-dev libepub0 calibre poppler-data fonts-takao-gothic fonts-takao-mincho \
