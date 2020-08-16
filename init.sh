@@ -4,8 +4,14 @@ if [ ! -e /aozoraepub3/AozoraEpub3.ini ]; then
   narou init -p /aozoraepub3 -l 1.8
   narou s convert.no-strip=true
   narou s convert.no-open=true
+  # To reduce processing time
   narou s default.enable_illust=false
+  narou s update.convert-only-new-arrival=true
   narou s device=kindle
+  # Copy epub to output folder
+  # You can convert these files in your host machine using kindklegen(x86 or amd64)
+  narou s convert.multi-device=kindle,epub
+  narou s convert.copy-to=/output
 fi
 if [ ! -e /novel/.narousetting ]; then
   mkdir -p .narousetting
