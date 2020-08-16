@@ -1,6 +1,10 @@
 #!/bin/sh
-if [ ! -e /novel/.narou ]; then
-  mkdir .narou
+
+if [ ! -e /aozoraepub3/AozoraEpub3.ini ]; then
+  narou init -p /aozoraepub3 -l 1.8
+  narou s convert.no-strip=true
+  narou s convert.no-open=true
+  narou s default.enable_illust=false
   narou s device=kindle
 fi
 if [ ! -e /novel/.narousetting ]; then
@@ -18,8 +22,4 @@ if [ ! -e /novel/.narousetting ]; then
     echo "already-server-boot: true";
   } | tee .narousetting/server_setting.yaml
 fi
-
-narou s convert.no-strip=true
-narou s convert.no-open=true
-
 exec "$@"
